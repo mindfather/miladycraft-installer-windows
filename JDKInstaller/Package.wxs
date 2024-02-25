@@ -1,0 +1,28 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="JDKInstaller" Manufacturer="Remilia Corporation" Version="1.0.0.0" UpgradeCode="bee5a790-2731-447d-aa0e-bceb5bce0790">
+
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+	<Feature Id="ProductFeature" Title="JDK Installation Feature" Level="1">
+		<ComponentGroupRef Id="JDKInstallationComponents" />
+	</Feature>
+
+	<!-- Properties -->
+	<Property Id="INSTALLJDK" Secure="yes" />
+
+	<!-- Set the INSTALLJDK property based on the outcome of the PowerShell script -->
+	<CustomAction 
+	  Id="CheckJDKVersion"
+	  Property="INSTALLJDK"
+	  Execute="immediate"
+	  Return="check"
+	  HideTarget="no"
+	  Impersonate="yes"
+	  ExeCommand="&quot;[SystemFolder]WindowsPowerShell\v1.0\powershell.exe&quot; -NoProfile -ExecutionPolicy Bypass -File &quot;[INSTALLFOLDER]CheckJDKVersion.ps1&quot;" />
+
+	<!-- Installation Sequence -->
+	<InstallExecuteSequence>
+		<Custom Action="CheckJDKVersion" Before="InstallFinalize"></Custom>
+	</InstallExecuteSequence>
+  </Package>
+</Wix>
