@@ -1,5 +1,10 @@
-JDKInstaller/bin
-JDKInstaller/obj
-Miladycraft/bin
-Miladycraft/obj
-Miladycraft/.vs
+.vs
+CheckJDK/.vs
+CheckJDK/bin
+CheckJDK/obj
+miladycraft-bootstrapper/.vs
+miladycraft-bootstrapper/bin
+miladycraft-bootstrapper/obj
+miladycraft-installer/.vs
+miladycraft-installer/bin
+miladycraft-installer/obj

@@ -1,0 +1,37 @@
+﻿<?include ..\Variables.wxi?>
+
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+	 xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util"
+	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
+
+	<Bundle Name="$(var.ProductName)"
+	 Manufacturer="$(var.Manufacturer)" 
+	 Version="$(var.ProductVersion)"
+	 UpgradeCode="e4794fc0-22f6-4313-ab6d-4d43cbb182b1">
+
+		<BootstrapperApplication>
+		  <bal:WixInternalUIBootstrapperApplication />
+		</BootstrapperApplication>
+
+
+    <Chain>
+	<MsiPackage Id="JDK21Installer"
+				Name="OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.msi"
+				Cache="remove"
+				ForcePerMachine="yes"
+				Permanent="yes"
+				Vital="yes"
+				DownloadUrl="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.msi"
+				InstallCondition="NOT JDK21_INSTALLED" />
+		
+		
+      <MsiPackage Id="MainInstaller" SourceFile="..\miladycraft-installer\bin\x86\Debug\en-US\miladycraft-installer.msi" Vital="yes" />
+    </Chain>
+
+  </Bundle>
+
+	<Fragment>
+		<Binary Id='CheckJDK' SourceFile='CheckJDK.dll' />
+		<CustomAction Id='CheckJDKAction' DllEntry='CheckJDK21' BinaryRef='CheckJDK' Execute='immediate' Return='check'/>
+	</Fragment>
+</Wix>

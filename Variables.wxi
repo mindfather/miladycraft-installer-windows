@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Include>
+	<?define Manufacturer = "Remilia Corporation" ?>
+	<?define ProductName = "Miladycraft" ?>
+	<?define ProductVersion = "1.5" ?>
+	<?define InstallerVersion = "450" ?> <!-- Windows Installer 4.5 supports Vista SP2 -->
+</Include>

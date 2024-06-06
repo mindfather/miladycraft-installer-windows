@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<?include ..\Variables.wxi?>
+
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+  xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util"
+  xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+  
+	<Package Name="$(var.ProductName)"
+	 Manufacturer="$(var.Manufacturer)" 
+	 Version="$(var.ProductVersion)"
+	 InstallerVersion="$(var.InstallerVersion)"
+	 UpgradeCode="844a2bcb-0e1b-4983-abfb-dda5d6a9f4cc">
+
+		<MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+		<ui:WixUI Id="WixUI_MiladycraftInstaller" InstallDirectory="INSTALLFOLDER" />
+
+<!--
+		<Binary Id='CheckJDKScript' SourceFile='CheckJDK.vbs' />
+		<CustomAction Id='CheckJDKAction' VBScriptCall='Main' BinaryRef='CheckJDKScript' Execute='immediate' Return='check'/>
+-->
+		<CustomAction Id="LaunchPollyMC"
+					  Directory="APPLICATIONFOLDER"
+					  ExeCommand="[APPLICATIONFOLDER]pollymc.exe -I MiladyCraft_localhost.zip"
+					  Execute="commit"
+					  Return="asyncNoWait" />
+
+		<InstallExecuteSequence>
+		  <Custom Action="LaunchPollyMC" Before="InstallFinalize" Condition="NOT Installed"></Custom>
+		</InstallExecuteSequence>
+		<Feature Id="Miladycraft" Title="Miladycraft_Installer.msi" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Package>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="APPLICATIONFOLDER">
+			<Files Include="$(SolutionDir)\Include\PollyMC-8.0\**" />
+			<File Id="PollyMC" Source="$(SolutionDir)\Include\pollymc.exe" Checksum="yes" />
+			<File Id="PollyMCFileLink" Source="$(SolutionDir)\Include\pollymc_filelink.exe" Checksum="yes" />
+			<File Id="PollyMCUpdater" Source="$(SolutionDir)\Include\pollymc_updater.exe" Checksum="yes" />
+			<File Id="MiladyModpack" Source="$(SolutionDir)\Include\MiladyCraft_localhost.zip" />
+		</ComponentGroup>
+	</Fragment>
+</Wix>
