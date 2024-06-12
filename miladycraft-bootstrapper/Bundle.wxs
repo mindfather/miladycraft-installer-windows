@@ -4,34 +4,38 @@
 	 xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util"
 	 xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
 
-	<Bundle Name="$(var.ProductName)"
-	 Manufacturer="$(var.Manufacturer)" 
-	 Version="$(var.ProductVersion)"
-	 UpgradeCode="e4794fc0-22f6-4313-ab6d-4d43cbb182b1">
+	<Bundle AboutUrl="https://miladycraft.net"
+			Name="$(var.ProductName)"
+			Manufacturer="$(var.Manufacturer)" 
+			Version="$(var.ProductVersion)"
+			UpgradeCode="e4794fc0-22f6-4313-ab6d-4d43cbb182b1"
+			Copyright="VPL (ɔ) All Rights Reversed"
+			IconSourceFile="..\assets\icon.ico">
 
 		<BootstrapperApplication>
-		  <bal:WixInternalUIBootstrapperApplication />
+			<bal:WixInternalUIBootstrapperApplication LogoFile="../assets/icon.ico" />
 		</BootstrapperApplication>
 
-
-    <Chain>
-	<MsiPackage Id="JDK21Installer"
-				Name="OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.msi"
-				Cache="remove"
-				ForcePerMachine="yes"
-				Permanent="yes"
-				Vital="yes"
-				DownloadUrl="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.msi"
-				InstallCondition="NOT JDK21_INSTALLED" />
-		
-		
-      <MsiPackage Id="MainInstaller" SourceFile="..\miladycraft-installer\bin\x86\Debug\en-US\miladycraft-installer.msi" Vital="yes" />
-    </Chain>
-
-  </Bundle>
+		<Chain>
+			<MsiPackage Id="JDK21Installer"
+						Name="OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.msi"
+						DisplayName="Eclipse Adoptium JDK 21"
+						Description="Eclipse Adoptium OpenJDK Version 21"
+						Compressed="no"
+						ForcePerMachine="yes"
+						Permanent="yes"
+						bal:PrereqPackage="yes"
+						Vital="yes"
+						DownloadUrl="https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.3%2B9/OpenJDK21U-jdk_x64_windows_hotspot_21.0.3_9.msi"
+						InstallCondition="NOT JDK21_INSTALLED" />
+			  <MsiPackage Id="MainInstaller"
+						  SourceFile="miladycraft-installer.msi"
+						  Vital="yes" />
+		</Chain>
+	</Bundle>
 
 	<Fragment>
-		<Binary Id='CheckJDK' SourceFile='CheckJDK.dll' />
+		<Binary Id='CheckJDK' SourceFile='$(CheckJDK.TargetPath)' />
 		<CustomAction Id='CheckJDKAction' DllEntry='CheckJDK21' BinaryRef='CheckJDK' Execute='immediate' Return='check'/>
 	</Fragment>
 </Wix>

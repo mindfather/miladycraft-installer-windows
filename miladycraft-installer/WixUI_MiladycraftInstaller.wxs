@@ -2,10 +2,18 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
     <?foreach WIXUIARCH in X86;X64;A64 ?>
     <Fragment>
+		<WixVariable
+			Id="WixUIBannerBmp"
+			Value="..\assets\bannrbmp.bmp" />
+		<WixVariable
+			Id="WixUIDialogBmp"
+			Value="..\assets\dlgbmp.bmp" />
+
         <UI Id="WixUI_MiladycraftInstaller_$(WIXUIARCH)">
             <TextStyle Id="WixUI_Font_Normal" FaceName="Courier" Size="8" />
-            <TextStyle Id="WixUI_Font_Bigger" FaceName="Courier" Size="12" />
-            <TextStyle Id="WixUI_Font_Title" FaceName="Courier" Size="9" Bold="yes" />
+            <TextStyle Id="WixUI_Font_Bigger" FaceName="Courier" Size="12" Red="111" Green="140" Blue="31" />
+            <TextStyle Id="WixUI_Font_Title" FaceName="Courier" Size="9" Bold="yes" Red="204" Green="0" Blue="18" />
+
 
             <Property Id="DefaultUIFont" Value="WixUI_Font_Normal" />
 

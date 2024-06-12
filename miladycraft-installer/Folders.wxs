@@ -1,9 +1,9 @@
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
   <Fragment>
     <StandardDirectory Id="ProgramFiles6432Folder">
-		<Directory Id="MANUFACTURERFOLDER" Name="!(bind.Property.Manufacturer)">
-			  <Directory Id="APPLICATIONFOLDER" Name="!(bind.Property.ProductName)" />
-		</Directory>
+	  <Directory Id="ApplicationFolder" Name="!(bind.Property.ProductName)" />
     </StandardDirectory>
+    <StandardDirectory Id="DesktopFolder" />
+    <StandardDirectory Id="ProgramMenuFolder" />
   </Fragment>
 </Wix>

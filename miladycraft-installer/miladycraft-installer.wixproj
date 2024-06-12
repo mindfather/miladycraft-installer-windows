@@ -4,7 +4,6 @@
     <Content Include="Variables.wxi" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="CheckJDK.vbs" />
     <None Include="Include\MiladyCraft_localhost.zip" />
     <None Include="Include\PollyMC-8.0\iconengines\qsvgicon.dll" />
     <None Include="Include\PollyMC-8.0\imageformats\qgif.dll" />
@@ -19,9 +18,10 @@
     <None Include="Include\PollyMC-8.0\jars\NewLaunchLegacy.jar" />
     <None Include="Include\PollyMC-8.0\platforms\qdirect2d.dll" />
     <None Include="Include\PollyMC-8.0\platforms\qwindows.dll" />
-    <None Include="Include\pollymc.exe" />
-    <None Include="Include\pollymc_filelink.exe" />
-    <None Include="Include\pollymc_updater.exe" />
+    <None Include="Include\PollyMC-8.0\pollymc.cfg" />
+    <None Include="Include\PollyMC-8.0\pollymc.exe" />
+    <None Include="Include\PollyMC-8.0\pollymc_filelink.exe" />
+    <None Include="Include\PollyMC-8.0\pollymc_updater.exe" />
     <None Include="Include\PollyMC-8.0\qt.conf" />
     <None Include="Include\PollyMC-8.0\Qt6Core.dll" />
     <None Include="Include\PollyMC-8.0\Qt6Core5Compat.dll" />
@@ -37,11 +37,18 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.UI.wixext" Version="5.0.0" />
+    <PackageReference Include="WixToolset.Util.wixext" Version="5.0.0" />
   </ItemGroup>
   <PropertyGroup>
     <DefineConstants>
 		  $(DefineConstants);
 		  licenseRtf=$(MSBuildProjectDirectory)\license.rtf;	
-		</DefineConstants>
+	</DefineConstants>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="assets\**" />
+  </ItemGroup>
 </Project>
