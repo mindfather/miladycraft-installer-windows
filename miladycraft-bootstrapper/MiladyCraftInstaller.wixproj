@@ -1,7 +1,17 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.0">
+  <!--
+	<Target Name="SignBundle">
+	  <Message Importance="high" Text="SignBundle: @(SignBundle)" />
+	  <Exec Command='signtool.exe sign /v /f $(TestCertificate) /p password %(MiladyCraftInstaller.TargetPath)' />
+	</Target>
+    -->
   <PropertyGroup>
     <OutputType>Bundle</OutputType>
+    <!--SignOutput>true</SignOutput-->
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="theme.xml" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="WixToolset.Bal.wixext" Version="5.0.0" />
     <PackageReference Include="WixToolset.UI.wixext" Version="5.0.0" />
@@ -9,11 +19,16 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CheckJDK\CheckJDK.csproj" />
+    <ProjectReference Include="..\CheckJDK\CheckJDK.csproj" />
+    <ProjectReference Include="..\miladycraft-installer\miladycraft-installer.wixproj" />
   </ItemGroup>
   <PropertyGroup>
     <DefineConstants>
 		  $(DefineConstants);
 		  licenseRtf=$(MSBuildProjectDirectory)\license.rtf;	
 	</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <OutputPath>..\bin</OutputPath>
   </PropertyGroup>
 </Project>

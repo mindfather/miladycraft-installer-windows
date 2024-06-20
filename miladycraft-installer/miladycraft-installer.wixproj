@@ -45,6 +45,10 @@
 		  licenseRtf=$(MSBuildProjectDirectory)\license.rtf;	
 	</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <OutputPath>..\miladycraft-bootstrapper\bin</OutputPath>
+    <BindFiles>false</BindFiles>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Remove="assets\**" />
   </ItemGroup>

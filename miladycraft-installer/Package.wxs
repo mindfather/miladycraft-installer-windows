@@ -36,14 +36,13 @@
 
 		<Feature Id="Miladycraft" Title="Miladycraft_Installer.msi" Level="1">
 			<ComponentGroupRef Id="ProductComponents" />
-			<ComponentRef Id="MiladyCraftShortcutComponent"/>
 		</Feature>
 	</Package>
 
 	<Fragment>
 		<ComponentGroup Id="ProductComponents" Directory="ApplicationFolder">
-			<Files Include="$(SolutionDir)Include\PollyMC-8.0\**">
-				<Exclude Files="$(SolutionDir)Include\PollyMC-8.0\*.exe" />
+			<Files Include="$(sys.CURRENTDIR)Include\PollyMC-8.0\**">
+				<Exclude Files="$(sys.CURRENTDIR)Include\PollyMC-8.0\*.exe" />
 			</Files>
 			<Component Guid="844a2bcb-0e1b-4983-abfb-dda5d6a9f4cb">
 				<RegistryValue Root="HKCU"
@@ -52,28 +51,20 @@
 							   Type="string"
 							   Value="[ApplicationFolder]"
 							   KeyPath="yes" />
-				<File Id="PollyMC" Source="$(SolutionDir)Include\PollyMC-8.0\pollymc.exe" Checksum="yes" />
-				<File Id="PollyMCFileLink" Source="$(SolutionDir)Include\PollyMC-8.0\pollymc_filelink.exe" Checksum="yes" />
-				<File Id="PollyMCUpdater" Source="$(SolutionDir)Include\PollyMC-8.0\pollymc_updater.exe" Checksum="yes" />
-				<File Id="MiladyModpack" Source="$(SolutionDir)Include\MiladyCraft_localhost.zip" />
+				<File Id="PollyMC" Source="$(ProjectDir)Include\PollyMC-8.0\pollymc.exe" Checksum="yes" />
+				<File Id="PollyMCFileLink" Source="$(ProjectDir)Include\PollyMC-8.0\pollymc_filelink.exe" Checksum="yes" />
+				<File Id="PollyMCUpdater" Source="$(ProjectDir)Include\PollyMC-8.0\pollymc_updater.exe" Checksum="yes" />
+				<File Id="MiladyModpack" Source="$(ProjectDir)Include\MiladyCraft_localhost.zip" />
 				<util:RemoveFolderEx Id="RemoveMiladyCraft" On="uninstall" Property="INSTALLLOCATION" />
+				<RemoveFile Directory="ProgramMenuFolder" On="uninstall" Name="Miladycraft" />
+				<Shortcut Id="MiladyCraftShortcut"
+						  Name="Miladycraft"
+						  Directory="ProgramMenuFolder"
+						  Description="Launch Miladycraft 1.5"
+						  Target="[#PollyMC]">
+					<Icon Id="MiladyCraft.exe" SourceFile="..\assets\icon.ico" />
+				</Shortcut>
 			</Component>
 		</ComponentGroup>
-
-		<Component Id="MiladyCraftShortcutComponent" Guid="844a2bcb-0e1b-4983-abfb-dda5d6a9f4cc" Directory="ProgramMenuFolder">
-			<RegistryValue Root="HKCU"
-						   Key="Software\Remilia Corporation\MiladyCraft"
-						   Name="shortcut"
-						   Type="integer"
-						   Value="1" />
-			<Shortcut Id="MiladyCraftShortcut"
-					  Name="Miladycraft"
-					  Description="Launch Miladycraft 1.5"
-					  Target="[#PollyMC]"
-					  Arguments="--launch MiladyCraft_localhost">
-				<Icon Id="MiladyCraft.exe" SourceFile="..\assets\icon.ico" />
-			</Shortcut>
-			<RemoveFile Id="RemoveMiladyCraftShortcut" Name="Miladycraft.lnk" On="uninstall" />
-		</Component>
 	</Fragment>
 </Wix>
