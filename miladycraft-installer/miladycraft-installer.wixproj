@@ -1,10 +1,11 @@
 ﻿<Project Sdk="WixToolset.Sdk/5.0.0">
   <ItemGroup>
+    <Content Include="Include\icon_320px_installer.ico" />
     <Content Include="Include\PollyMC-8.0\manifest.txt" />
     <Content Include="Variables.wxi" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Include\MiladyCraft_localhost.zip" />
+    <None Include="Include\Miladycraft 1.5.zip" />
     <None Include="Include\PollyMC-8.0\iconengines\qsvgicon.dll" />
     <None Include="Include\PollyMC-8.0\imageformats\qgif.dll" />
     <None Include="Include\PollyMC-8.0\imageformats\qicns.dll" />
@@ -48,6 +49,9 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <OutputPath>..\miladycraft-bootstrapper\bin</OutputPath>
     <BindFiles>false</BindFiles>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutputPath>..\miladycraft-bootstrapper\bin</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="assets\**" />

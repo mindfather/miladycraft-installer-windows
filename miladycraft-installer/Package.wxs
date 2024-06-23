@@ -18,7 +18,7 @@
 
 		<CustomAction Id="LaunchPollyMC"
 					  Directory="ApplicationFolder"
-					  ExeCommand="[ApplicationFolder]pollymc.exe -I MiladyCraft_localhost.zip"
+					  ExeCommand="[ApplicationFolder]pollymc.exe -I &quot;.\MiladyCraft 1.5.zip&quot;"
 					  Execute="commit"
 					  Return="asyncNoWait" />
 
@@ -54,7 +54,7 @@
 				<File Id="PollyMC" Source="$(ProjectDir)Include\PollyMC-8.0\pollymc.exe" Checksum="yes" />
 				<File Id="PollyMCFileLink" Source="$(ProjectDir)Include\PollyMC-8.0\pollymc_filelink.exe" Checksum="yes" />
 				<File Id="PollyMCUpdater" Source="$(ProjectDir)Include\PollyMC-8.0\pollymc_updater.exe" Checksum="yes" />
-				<File Id="MiladyModpack" Source="$(ProjectDir)Include\MiladyCraft_localhost.zip" />
+				<File Id="MiladyModpack" Source="$(ProjectDir)Include\Miladycraft 1.5.zip" />
 				<util:RemoveFolderEx Id="RemoveMiladyCraft" On="uninstall" Property="INSTALLLOCATION" />
 				<RemoveFile Directory="ProgramMenuFolder" On="uninstall" Name="Miladycraft" />
 				<Shortcut Id="MiladyCraftShortcut"
